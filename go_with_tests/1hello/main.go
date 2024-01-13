@@ -5,19 +5,33 @@ import "fmt"
 
 // separate domain code from outside world, side effect
 
-const spanish = "spanish"
-const engc = "Hello, "
-const spanishc = "Hola, "
+const (
+	spanish = "spanish"
+	french = "french"
+	
+	engc = "Hello, "
+	spanishc = "Hola, "
+	frenchc = "Bonjour, "
+)
 
 func hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
+	return addPrefix(language) + name
+}
 
-	if language == spanish {
-		return spanishc + name
+func addPrefix(language string) (prefix string){
+	switch language{
+	case french:
+		prefix = frenchc
+	case spanish:
+		prefix = spanishc
+	default:
+		prefix = engc
 	}
-	return engc + name
+
+	return 
 }
 
 func main() {
