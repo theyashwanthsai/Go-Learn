@@ -7,15 +7,15 @@ import(
 func TestHello(t *testing.T){
 	
 	t.Run("Saying hello to ppl", func(t *testing.T){
-		got := hello("Sai")
+		got := hello("Sai", "spanish")
 
-		want := "Hello, Sai"
+		want := "Hola, Sai"
 
 		assert(t, got, want)
 	})
 
 	t.Run("", func(t *testing.T){
-		got := hello("")
+		got := hello("", "")
 
 		want := "Hello, World"
 
