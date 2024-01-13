@@ -5,10 +5,27 @@ import(
 )
 
 func TestHello(t *testing.T){
-	got := hello()
+	
+	t.Run("Saying hello to ppl", func(t *testing.T){
+		got := hello("Sai")
 
-	want := "Hello, World!"
+		want := "Hello, Sai"
 
+		assert(t, got, want)
+	})
+
+	t.Run("", func(t *testing.T){
+		got := hello("")
+
+		want := "Hello, World"
+
+		assert(t, got, want)
+	})
+}
+
+
+func assert(t testing.TB, got string, want string){
+	t.Helper()
 	if got != want{
 		t.Errorf("got %q want %q", got, want)
 	}
