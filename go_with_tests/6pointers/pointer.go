@@ -1,7 +1,9 @@
 package pointers
 
-import "fmt"
-
+import (
+	"fmt"
+	"errors"
+)
 
 type Bitcoin int
 
@@ -24,6 +26,14 @@ func (w *Wallet) Balance() Bitcoin {
 	return w.Amount
 }
 
-func (w *Wallet) Withdraw(amount Bitcoin){
-	w.Amount -= amount
+
+var InsufficientFundsErr = errors.New("cannot withdraw, insufficient funds")
+func (w *Wallet) Withdraw(amount Bitcoin) error{
+	if w.Amount < amount{
+		return InsufficientFundsErr
+	}else{
+		w.Amount -= amount
+	}
+	return nil
+
 }
