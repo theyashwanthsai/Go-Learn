@@ -1,3 +1,3 @@
-module ttd/slices
+module ttd/maps
 
 go 1.20
