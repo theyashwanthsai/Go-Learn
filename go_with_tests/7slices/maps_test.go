@@ -20,6 +20,35 @@ func TestSearch(t *testing.T){
 	})
 }
 
+func TestAdd(t *testing.T){
+	t.Run("New word", func(t *testing.T){
+		dict := Dictionary{}
+		err := dict.Add("Test", "This is just a test")
+		assertError(t, err, nil)
+		assertDefinition(t, dict, "Test", "This is just a test")
+	})
+
+	t.Run("Already exists", func(t *testing.T){
+		dict := Dictionary{"Test": "This is just a test"}
+		err := dict.Add("Test", "This is just a test")
+		assertError(t, err, nil)
+		assertDefinition(t, dict, "Test", "This is just a test")
+	})
+}
+
+func assertDefinition(t testing.TB, dict Dictionary, key, value string){
+	t.Helper()
+	got, err := dict.Search(key)
+	want := value
+
+	if err != nil{
+		t.Fatal("Should find added elements only:", err)
+	}
+	assertString(t, got, want)
+}
+
+
+
 func assertString(t testing.TB, got, want string){
 	t.Helper()
 	if got != want{
@@ -34,3 +63,4 @@ func assertError(t testing.TB, got, want error) {
 		t.Errorf("got error %q want %q", got, want)
 	}
 }
+
